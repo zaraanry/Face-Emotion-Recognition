@@ -8,15 +8,7 @@ import scipy.ndimage as ndi
 import cv2
 
 class ImageGenerator(object):
-    """ Image generator with saturation, brightness, lighting, contrast,
-    horizontal flip and vertical flip transformations. It supports
-    bounding boxes coordinates.
-
-    TODO:
-        - Finish support for not using bounding_boxes
-            - Random crop
-            - Test other transformations
-    """
+   
     def __init__(self, ground_truth_data, batch_size, image_size,
                 train_keys, validation_keys,
                 ground_truth_transformer=None,
@@ -58,8 +50,7 @@ class ImageGenerator(object):
         self.translation_factor = translation_factor
 
     def _do_random_crop(self, image_array):
-        """IMPORTANT: random crop only works for classification since the
-        current implementation does no transform bounding boxes"""
+
         height = image_array.shape[0]
         width = image_array.shape[1]
         x_offset = np.random.uniform(0, self.translation_factor * width)
@@ -80,8 +71,7 @@ class ImageGenerator(object):
         return image_array
 
     def do_random_rotation(self, image_array):
-        """IMPORTANT: random rotation only works for classification since the
-        current implementation does no transform bounding boxes"""
+
         height = image_array.shape[0]
         width = image_array.shape[1]
         x_offset = np.random.uniform(0, self.translation_factor * width)

@@ -121,36 +121,17 @@ def draw_mosaic(data, num_rows, num_cols, class_vectors=None,
     plt.tight_layout()
 
 if __name__ == '__main__':
-    #from utils.data_manager import DataManager
     from utils.utils import get_labels
     from keras.models import load_model
     import pickle
 
-    #dataset_name = 'fer2013'
-    #model_path = '../trained_models/emotion_models/simple_CNN.985-0.66.hdf5'
     dataset_name = 'fer2013'
     class_decoder = get_labels(dataset_name)
-    #data_manager = DataManager(dataset_name)
-    #faces, emotions = data_manager.get_data()
     faces = pickle.load(open('faces.pkl', 'rb'))
     emotions = pickle.load(open('emotions.pkl', 'rb'))
     pretty_imshow(plt.gca(), make_mosaic(faces[:4], 2, 2), cmap='gray')
     plt.show()
 
-    """
-    image_arg = 0
-    face = faces[image_arg:image_arg + 1]
-    emotion = emotions[image_arg:image_arg + 1]
-    display_image(face, emotion, class_decoder)
-    plt.show()
-
-    normal_imshow(plt.gca(), make_mosaic(faces[:4], 3, 3), cmap='gray')
-    plt.show()
-
-    draw_mosaic(faces, 2, 2, emotions, class_decoder)
-    plt.show()
-
-    """
     model = load_model('../trained_models/emotion_models/simple_CNN.985-0.66.hdf5')
     conv1_weights = model.layers[2].get_weights()
     kernel_conv1_weights = conv1_weights[0]

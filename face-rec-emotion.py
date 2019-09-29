@@ -127,15 +127,6 @@ else:
 while cap.isOpened(): # True:
     ret, frame = cap.read()
 
-    #frame = video_capture.read()[1]
-
-    # To print the facial landmarks
-    # landmrk = face_recognition.face_landmarks(frame)
-    # for l in landmrk:
-    #     for key,val in l.items():
-    #         for (x,y) in val:
-    #             cv2.circle(frame, (x, y), 1, (255,0, 0), -1)
-
 
     gray_image = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     rgb_image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)

@@ -27,7 +27,7 @@ def target_category_loss_output_shape(input_shape):
 
 
 def normalize(x):
-    # utility function to normalize a tensor by its L2 norm
+
     return x / (K.sqrt(K.mean(K.square(x))) + 1e-5)
 
 
@@ -59,33 +59,25 @@ def modify_backprop(model, name, task):
     graph = tf.get_default_graph()
     with graph.gradient_override_map({'Relu': name}):
 
-        # get layers that have an activation
         activation_layers = [layer for layer in model.layers
                              if hasattr(layer, 'activation')]
 
-        # replace relu activation
         for layer in activation_layers:
             if layer.activation == keras.activations.relu:
                 layer.activation = tf.nn.relu
 
-        # re-instanciate a new model
         if task == 'gender':
             model_path = '../trained_models/gender_models/gender_mini_XCEPTION.21-0.95.hdf5'
         elif task == 'emotion':
             model_path = '../trained_models/emotion_models/fer2013_mini_XCEPTION.102-0.66.hdf5'
-            # model_path = '../trained_models/fer2013_mini_XCEPTION.119-0.65.hdf5'
-            # model_path = '../trained_models/fer2013_big_XCEPTION.54-0.66.hdf5'
         new_model = load_model(model_path, compile=False)
     return new_model
 
 
 def deprocess_image(x):
-    """ Same normalization as in:
-    https://github.com/fchollet/keras/blob/master/examples/conv_filter_visualization.py
-    """
+
     if np.ndim(x) > 3:
         x = np.squeeze(x)
-    # normalize tensor: center on 0., ensure std is 0.1
     x = x - x.mean()
     x = x / (x.std() + 1e-5)
     x = x * 0.1

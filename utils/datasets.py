@@ -6,8 +6,7 @@ import os
 import cv2
 
 class DataManager(object):
-    """Class for loading fer2013 emotion classification dataset or
-        imdb gender classification dataset."""
+
     def __init__(self, dataset_name='imdb', dataset_path=None, image_size=(48, 48)):
 
         self.dataset_name = dataset_name
@@ -88,7 +87,7 @@ class DataManager(object):
             faces[file_arg] = image_array
             file_basename = os.path.basename(file_path)
             file_emotion = file_basename[4:6]
-            # there are two file names in the dataset that don't match the given classes
+
             try:
                 emotion_arg = class_to_arg[file_emotion]
             except:
