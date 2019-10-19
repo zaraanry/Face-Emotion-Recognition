@@ -15,39 +15,6 @@ from utils.datasets import get_labels
 from utils.inference import draw_bounding_box
 from utils.preprocessor import preprocess_input
 
-
-import range
-import keras
-
-
-
-
-
-from scipy.io import loadmat
-import pandas as pd
-import numpy as np
-from random import shuffle
-import os
-import cv2
-import cv2
-import h5py
-import keras
-import keras.backend as K
-from keras.layers.core import Lambda
-from keras.models import Sequential
-from keras.models import load_model
-import numpy as np
-import tensorflow as tf
-from tensorflow.python.framework import ops
-from .preprocessor import preprocess_input
-
-
-
-
-
-
-
-a = 15
 USE_WEBCAM = True # If false, loads video file source
 
 # parameters for loading data and images
